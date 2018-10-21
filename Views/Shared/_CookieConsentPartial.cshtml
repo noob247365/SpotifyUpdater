@@ -8,24 +8,34 @@
 
 @if (showBanner)
 {
-    <nav id="cookieConsent" class="navbar navbar-default navbar-fixed-top" role="alert">
+    <nav id="cookieConsent" class="navbar is-fixed-top is-dark" role="alert">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#cookieConsent .navbar-collapse">
-                    <span class="sr-only">Toggle cookie consent banner</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <span class="navbar-brand"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://bulma.io">
+                    <span class="icon is-large has-text-info">
+                        <i class="fas fa-3x fa-info-circle"></i>
+                    </span>
+                </a>
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
-            <div class="collapse navbar-collapse">
-                <p class="navbar-text">
-                    Use this space to summarize your privacy and cookie use policy.
-                </p>
-                <div class="navbar-right">
-                    <a asp-controller="Home" asp-action="Privacy" class="btn btn-info navbar-btn">Learn More</a>
-                    <button type="button" class="btn btn-default navbar-btn" data-cookie-string="@cookieString">Accept</button>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <p class="navbar-item">
+                        Use this space to summarize your privacy and cookie use policy.
+                    </p>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a asp-controller="Home" asp-action="Privacy" class="button is-info">Learn More</a>
+                            <button type="button" class="button is-primary" data-cookie-string="@cookieString">Accept</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,7 +44,7 @@
         (function () {
             document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
                 document.cookie = el.target.dataset.cookieString;
-                document.querySelector("#cookieConsent").classList.add("hidden");
+                document.querySelector("#cookieConsent").remove();
             }, false);
         })();
     </script>
