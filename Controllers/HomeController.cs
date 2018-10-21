@@ -39,5 +39,19 @@ namespace Spotify.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Authorize()
+        {
+            // https://developer.spotify.com/documentation/general/guides/authorization-guide
+            return Redirect($"https://accounts.spotify.com/authorize?response_type=code&client_id=8ad6eff46429447490ecd14a8b20b7b9&redirect_uri={Uri.EscapeDataString("https://localhost:5001/Home/Callback")}");
+        }
+
+        public IActionResult Callback(string code = null, string error = null)
+        {
+            if (!string.IsNullOrWhiteSpace(error))
+                return View("Error", new ErrorViewModel() { Message = $"Unable to authroize via Spotify: {error}"});
+            ViewData["Code"] = code;
+            return View();
+        }
     }
 }
