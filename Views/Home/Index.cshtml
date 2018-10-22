@@ -4,3 +4,10 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 <a asp-area="" asp-controller="Home" asp-action="Authorize">Authorize</a>
+
+@if (ViewData.ContainsKey("access_token"))
+{
+<br />
+<h4>Access Token:</h4>
+<pre>@ViewData["access_token"]</pre>
+}
